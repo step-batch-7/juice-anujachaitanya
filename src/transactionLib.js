@@ -1,15 +1,11 @@
 const utils = require("./utilsLib");
 
-const save = function(transactionData, path, readFile, writeFile) {
+const save = function(transactionData, path, readFile, writeFile, date) {
   let beverageLogs = utils.getBeverageLogs(path, readFile);
-  console.log("beverageLogs", beverageLogs);
   beverageLogs = JSON.parse(beverageLogs);
-  console.log(beverageLogs);
   beverage = transactionData.beverage;
   quantity = transactionData.qty;
-  date = new Date();
   empId = transactionData.empId;
-  console.log("before if", beverageLogs[empId]);
   if (!beverageLogs[empId]) {
     beverageLogs[empId] = {};
     beverageLogs[empId].orders = [];
@@ -17,21 +13,25 @@ const save = function(transactionData, path, readFile, writeFile) {
   }
   beverageDetails = { beverage: beverage, qty: quantity, time: date };
   beverageLogs[empId].orders.push(beverageDetails);
-  beverageLogs[empId].total += quantity;
+  beverageLogs[empId].total += +quantity;
   beverageLogs = JSON.stringify(beverageLogs);
   writeFile(path, beverageLogs);
+  return "transaction successful";
 };
 
-const query = function(transactionData, beverageLogs) {
-  transactionHistory = [];
+const query = function(transactionData, path, readFile) {
+  transactionHistory = [["empId", "beverage", "qty", "time"]];
   empId = transactionData.empId;
+  let beverageLogs = utils.getBeverageLogs(path, readFile);
+  beverageLogs = JSON.parse(beverageLogs);
   if (!beverageLogs[empId]) {
     return "No entries for this empId";
   }
   for (let order of beverageLogs[empId].orders) {
-    transactionHistory.push(Object.values(order));
+    let record = Object.values(order);
+    transactionHistory.push(record);
   }
-  return transactionHistory;
+  return transactionHistory.join("\n");
 };
 
 exports.query = query;

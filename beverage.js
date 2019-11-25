@@ -1,10 +1,8 @@
-const inputHandler = require("./src/inputHandlingLib");
-const transactionLib = require("./src/transactionLib");
+const transaction = require("./src/performTransactions");
 const input = process.argv.slice(2);
 
 const main = function() {
-  let newInput = inputHandler.isValidTransaction(input);
-  console.log(transactionLib.save(newInput, {}));
+  console.log(transaction.performOperation(input, "./beverageLogs.json"));
 };
 
 main();

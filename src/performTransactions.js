@@ -9,16 +9,9 @@ const performOperation = function(input, path) {
     let transaction = inputHandler.createObjectForTransaction(input);
     let allProcesses = { save: transactions.save, query: transactions.query };
     let process = allProcesses[transaction.command];
-    console.log("my path", path);
-    process(transaction, path, fs.readFileSync, fs.writeFileSync);
-    return "transaction successful !";
+    return process(transaction, path, fs.readFileSync, fs.writeFileSync, new Date());
   }
   return "invalid input";
 };
-console.log(
-  performOperation(
-    ["--save", "--beverage", "orange", "--empId", "1", "--qty", "123"],
-    "./beverageLogs.json"
-  )
-);
-// console.log(utils.existsBeverageLogs("./beverageLogs.json", fs.writeFileSync, fs.existsSync));
+
+exports.performOperation = performOperation;

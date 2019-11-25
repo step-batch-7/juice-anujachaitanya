@@ -13,10 +13,8 @@ const validateCommand = function(command) {
 };
 
 const existsBeverageLogs = function(path, writeFile, exists) {
-  console.log("exist >>", exists(path));
   if (!exists(path)) {
     writeFile(path, "{}", "utf8");
-    console.log("in if");
   }
 };
 

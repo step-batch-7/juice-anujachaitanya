@@ -1,1 +1,13 @@
-{"1":{"orders":[{"beverage":"orange","qty":"123","time":"2019-11-25T11:09:20.872Z"}],"total":"0123"}}
+{
+  "1": {
+    "orders": [{ "beverage": "orange", "qty": "12", "time": "2019-11-25T12:09:02.388Z" }],
+    "total": 12
+  },
+  "25313": {
+    "orders": [
+      { "beverage": "watermelon", "qty": "2", "time": "2019-11-25T15:33:03.954Z" },
+      { "beverage": "watermelon", "qty": "2", "time": "2019-11-25T15:36:18.697Z" }
+    ],
+    "total": 4
+  }
+}
