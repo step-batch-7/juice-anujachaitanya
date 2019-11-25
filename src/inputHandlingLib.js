@@ -21,12 +21,51 @@ const isValidTransaction = function(input) {
   let isValidInstruction = transformedData[0].every(utils.validateOptions);
   let isValidCommand = utils.validateCommand(transformedData[1]);
   if (isValidInstruction && isValidCommand) {
-    return transformDataIntoObj(transformedData);
+    return true;
   }
-  return "faltupana";
+  return false;
 };
-console.log(isValidTransaction(["--save", "--beverage", "orange", "--empId", 25313, "--qty", 1]));
+
+const isValidBeverage = function(beverage) {
+  return typeof beverage == "string";
+};
+
+const isValidEmpId = function(empId) {
+  return Number.isInteger(empId);
+};
+
+const isValidQty = function(qty) {
+  return Number.isInteger(qty);
+};
+
+const checkOptForSave = function(transactionDetails) {
+  return (
+    isValidBeverage(transactionDetails.beverage) &&
+    isValidEmpId(transactionDetails.empId) &&
+    isValidQty(transactionDetails.qty)
+  );
+};
+
+const checkOptForQuery = function(transactionDetails) {
+  return isValidEmpId(transactionDetails.empId);
+};
+
+const areEnoughOptions = function(transaction) {
+  transactionDetails = transformDataToArray(transaction);
+  transactionDetails = transformDataIntoObj(transactionDetails);
+  let validityFunc = { save: checkOptForSave, query: checkOptForQuery };
+  let validateEnoughArgv = validityFunc[transactionDetails.command];
+  return validateEnoughArgv(transactionDetails);
+};
+
+const createObjectForTransaction = function(input) {
+  let transactionDetails = transformDataToArray(input);
+  transactionDetails = transformDataIntoObj(transactionDetails);
+  return transactionDetails;
+};
 
 exports.isValidTransaction = isValidTransaction;
 exports.transformDataIntoObj = transformDataIntoObj;
 exports.transformDataToArray = transformDataToArray;
+exports.areEnoughOptions = areEnoughOptions;
+exports.createObjectForTransaction = createObjectForTransaction;

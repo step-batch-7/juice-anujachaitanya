@@ -4,7 +4,7 @@ const arrangeOptions = function(transaction, data) {
 };
 const validateOptions = function(data) {
   options = ["--qty", "--beverage", "--empId"];
-  return options.includes(data[0]);
+  return options.includes(data[0]) && data.length == 2;
 };
 
 const validateCommand = function(command) {
@@ -12,6 +12,21 @@ const validateCommand = function(command) {
   return validCommand.includes(command);
 };
 
+const existsBeverageLogs = function(path, writeFile, exists) {
+  console.log("exist >>", exists(path));
+  if (!exists(path)) {
+    writeFile(path, "{}", "utf8");
+    console.log("in if");
+  }
+};
+
+const getBeverageLogs = function(path, readFile) {
+  let beverageLogs = readFile(path, "utf8");
+  return beverageLogs;
+};
+
 exports.validateOptions = validateOptions;
 exports.arrangeOptions = arrangeOptions;
 exports.validateCommand = validateCommand;
+exports.existsBeverageLogs = existsBeverageLogs;
+exports.getBeverageLogs = getBeverageLogs;

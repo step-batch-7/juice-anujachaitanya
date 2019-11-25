@@ -18,3 +18,13 @@ describe("validateOptions", () => {
     assert.ok(!utils.validateOptions(["--beverag", "orange"]));
   });
 });
+
+describe("validateCommand", () => {
+  it("should validate valid command", () => {
+    assert.ok(utils.validateCommand("--save"));
+  });
+
+  it("should invalidate invalid command", () => {
+    assert.ok(!utils.validateCommand("-save"));
+  });
+});

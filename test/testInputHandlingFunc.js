@@ -41,3 +41,25 @@ describe("transformDataIntoObj", () => {
     assert.deepStrictEqual(actual, expected);
   });
 });
+
+describe("isValidTransaction", () => {
+  it("should validate transaction", () => {
+    let actual = inputHandler.isValidTransaction([
+      "--save",
+      "--beverage",
+      "orange",
+      "--qty",
+      1,
+      "--empId",
+      25313
+    ]);
+    let expected = true;
+    assert.deepStrictEqual(actual, expected);
+  });
+
+  it("should invalidate transaction for invalid options", () => {
+    let actual = inputHandler.isValidTransaction(["--date", "--qty", 1]);
+    let expected = false;
+    assert.strictEqual(actual, expected);
+  });
+});
