@@ -33,7 +33,7 @@ describe("existsBeverageLogs", () => {
   it("should execute of statement if file is not present", () => {
     const writeFile = function(args, initialValue, format) {
       let actual = [args, initialValue, format];
-      let expected = ["./beverageLogs.json", "{}", "utf8"];
+      let expected = ["./beverageLogs.json", "[]", "utf8"];
       assert.deepStrictEqual(actual, expected);
       return true;
     };
@@ -49,7 +49,7 @@ describe("existsBeverageLogs", () => {
   it("should not execute if statement if file is present", () => {
     const writeFile = function(args, initialValue, format) {
       let actual = [args, initialValue, format];
-      let expected = ["./beverageLogs.json", {}, "utf8"];
+      let expected = ["./beverageLogs.json", [], "utf8"];
       assert.deepStrictEqual(actual, expected);
       return true;
     };

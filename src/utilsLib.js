@@ -15,7 +15,7 @@ const validateCommand = function(command) {
 
 const existsBeverageLogs = function(path, writeFile, exists) {
   if (!exists(path)) {
-    writeFile(path, "{}", "utf8");
+    writeFile(path, "[]", "utf8");
     return true;
   }
 };
