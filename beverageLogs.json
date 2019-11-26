@@ -1,13 +1,1 @@
-{
-  "1": {
-    "orders": [{ "beverage": "orange", "qty": "12", "time": "2019-11-25T12:09:02.388Z" }],
-    "total": 12
-  },
-  "25313": {
-    "orders": [
-      { "beverage": "watermelon", "qty": "2", "time": "2019-11-25T15:33:03.954Z" },
-      { "beverage": "watermelon", "qty": "2", "time": "2019-11-25T15:36:18.697Z" }
-    ],
-    "total": 4
-  }
-}
+{"1":{"orders":[{"beverage":"orange","qty":"12","time":"2019-11-25T12:09:02.388Z"}],"total":12},"25313":{"orders":[{"beverage":"watermelon","qty":"2","time":"2019-11-25T15:33:03.954Z"},{"beverage":"watermelon","qty":"2","time":"2019-11-25T15:36:18.697Z"},{"beverage":"watermelon","qty":"2","time":"2019-11-25T15:53:34.273Z"},{"time":"2019-11-25T16:13:47.337Z"},{"time":"2019-11-25T16:14:25.084Z"}],"total":null},"25314":{"orders":[{"beverage":"orange","qty":"2","time":"2019-11-25T15:54:14.967Z"}],"total":2},"undefined":{"orders":[{"time":"2019-11-25T16:23:52.211Z"},{"time":"2019-11-25T16:24:25.405Z"}],"total":null}}

@@ -50,8 +50,7 @@ describe("isValidTransaction", () => {
       "orange",
       "--qty",
       1,
-      "--empId",
-      25313
+      "--empId"
     ]);
     let expected = true;
     assert.deepStrictEqual(actual, expected);
@@ -61,5 +60,39 @@ describe("isValidTransaction", () => {
     let actual = inputHandler.isValidTransaction(["--date", "--qty", 1]);
     let expected = false;
     assert.strictEqual(actual, expected);
+  });
+});
+
+describe("checkOptForSave", () => {
+  it("should validate all options for save", () => {
+    let input = { beverage: "orange", empId: 2323, qty: 12 };
+    assert.ok(inputHandler.checkOptForSave(input));
+  });
+
+  it("should invalidate invalid values for beverage", () => {
+    let input = { beverage: 2313, empId: "anuja", qty: "1a2" };
+    assert.ok(!inputHandler.checkOptForSave(input));
+  });
+});
+
+describe("checkOptForQuery", () => {
+  it("should validate all options for query", () => {
+    let input = { empId: 25313 };
+    assert.ok(inputHandler.checkOptForQuery(input));
+  });
+});
+
+describe("areEnoughOptions", () => {
+  it("should invalidate incorrect no of arguments", () => {
+    let input = ["--query", "--empId", "anuja"];
+    assert.ok(!inputHandler.areEnoughOptions(input));
+  });
+});
+
+describe("createObjectForTransaction", () => {
+  it("should return object for given details", () => {
+    let actual = inputHandler.createObjectForTransaction(["--query", "--empId", 25313]);
+    let expected = { command: "query", empId: 25313, beverage: undefined, qty: undefined };
+    assert.deepStrictEqual(actual, expected);
   });
 });

@@ -2,6 +2,7 @@ const arrangeOptions = function(transaction, data) {
   transaction[data[0].slice(2)] = data[1];
   return transaction;
 };
+
 const validateOptions = function(data) {
   options = ["--qty", "--beverage", "--empId"];
   return options.includes(data[0]) && data.length == 2;
@@ -15,6 +16,7 @@ const validateCommand = function(command) {
 const existsBeverageLogs = function(path, writeFile, exists) {
   if (!exists(path)) {
     writeFile(path, "{}", "utf8");
+    return true;
   }
 };
 

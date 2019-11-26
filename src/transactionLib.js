@@ -29,6 +29,7 @@ const query = function(transactionData, path, readFile) {
   }
   for (let order of beverageLogs[empId].orders) {
     let record = Object.values(order);
+    record.splice(0, 0, empId);
     transactionHistory.push(record);
   }
   return transactionHistory.join("\n");

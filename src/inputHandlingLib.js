@@ -69,3 +69,5 @@ exports.transformDataIntoObj = transformDataIntoObj;
 exports.transformDataToArray = transformDataToArray;
 exports.areEnoughOptions = areEnoughOptions;
 exports.createObjectForTransaction = createObjectForTransaction;
+exports.checkOptForSave = checkOptForSave;
+exports.checkOptForQuery = checkOptForQuery;
