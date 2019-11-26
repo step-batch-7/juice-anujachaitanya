@@ -32,11 +32,15 @@ describe("validateCommand", () => {
 describe("existsBeverageLogs", () => {
   it("should execute of statement if file is not present", () => {
     const writeFile = function(args, initialValue, format) {
-      if (args == "./beverageLogs.json" && initialValue == {} && format == "utf8") return true;
+      let actual = [args, initialValue, format];
+      let expected = ["./beverageLogs.json", "{}", "utf8"];
+      assert.deepStrictEqual(actual, expected);
+      return true;
     };
 
     const exists = function(args) {
-      if (args != "./beverageLogs.json") return false;
+      assert.strictEqual(args, "./beverageLogs.json");
+      return false;
     };
 
     assert.ok(utils.existsBeverageLogs("./beverageLogs.json", writeFile, exists));
@@ -44,13 +48,16 @@ describe("existsBeverageLogs", () => {
 
   it("should not execute if statement if file is present", () => {
     const writeFile = function(args, initialValue, format) {
-      if (args == "./beverageLogs.json" && initialValue == {} && format == "utf8") return true;
+      let actual = [args, initialValue, format];
+      let expected = ["./beverageLogs.json", {}, "utf8"];
+      assert.deepStrictEqual(actual, expected);
+      return true;
     };
 
     const exists = function(args) {
-      if (args == "./beverageLogs.json") return true;
+      assert.equal(args, "./beverageLogs.json");
+      return true;
     };
-
     assert.ok(!utils.existsBeverageLogs("./beverageLogs.json", writeFile, exists));
   });
 });
@@ -58,7 +65,10 @@ describe("existsBeverageLogs", () => {
 describe("getBeverageLogs", () => {
   it("should return true for correct arguments", () => {
     const readFile = function(path, format) {
-      if (path == "./beverage.json" && format == "utf8") return true;
+      let expected = ["./beverage.json", "utf8"];
+      let actual = [path, format];
+      assert.deepStrictEqual(actual, expected);
+      return true;
     };
     assert.ok(utils.getBeverageLogs("./beverage.json", readFile));
   });

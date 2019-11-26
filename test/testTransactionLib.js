@@ -2,7 +2,7 @@ const assert = require("assert");
 const save = require("../src/transactionLib").save;
 const query = require("../src/transactionLib").query;
 
-describe("save", () => {
+/*describe("save", () => {
   it("should insert new empId with records", () => {
     let actual = save({ empId: 25313, beverage: "orange", qty: 1 }, {});
     let expected = {
@@ -68,4 +68,4 @@ describe("query", () => {
     ];
     assert.deepStrictEqual(actual, expected);
   });
-});
+});*/

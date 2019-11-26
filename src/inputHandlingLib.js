@@ -31,11 +31,11 @@ const isValidBeverage = function(beverage) {
 };
 
 const isValidEmpId = function(empId) {
-  return Number.isInteger(empId);
+  return Number.isInteger(+empId);
 };
 
 const isValidQty = function(qty) {
-  return Number.isInteger(qty);
+  return Number.isInteger(+qty);
 };
 
 const checkOptForSave = function(transactionDetails) {

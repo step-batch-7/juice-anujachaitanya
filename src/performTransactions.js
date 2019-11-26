@@ -8,8 +8,9 @@ const performOperation = function(input, path) {
     utils.existsBeverageLogs(path, fs.writeFileSync, fs.existsSync);
     let transaction = inputHandler.createObjectForTransaction(input);
     let allProcesses = { save: transactions.save, query: transactions.query };
+    let beverageLogs = utils.getBeverageLogs(path, fs.readFileSync);
     let process = allProcesses[transaction.command];
-    return process(transaction, path, fs.readFileSync, fs.writeFileSync, new Date());
+    return process(transaction, beverageLogs, new Date(), path, fs.writeFileSync);
   }
   return "invalid input";
 };

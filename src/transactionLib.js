@@ -1,39 +1,33 @@
 const utils = require("./utilsLib");
 
-const save = function(transactionData, path, readFile, writeFile, date) {
-  let beverageLogs = utils.getBeverageLogs(path, readFile);
-  beverageLogs = JSON.parse(beverageLogs);
-  beverage = transactionData.beverage;
-  quantity = transactionData.qty;
-  empId = transactionData.empId;
-  if (!beverageLogs[empId]) {
-    beverageLogs[empId] = {};
-    beverageLogs[empId].orders = [];
-    beverageLogs[empId].total = 0;
+const save = function(transactionData, beverageLogs, date, path, writeFile) {
+  if (!beverageLogs[transactionData.empId]) {
+    beverageLogs[transactionData.empId] = { orders: [], total: 0 };
   }
-  beverageDetails = { beverage: beverage, qty: quantity, time: date };
-  beverageLogs[empId].orders.push(beverageDetails);
-  beverageLogs[empId].total += +quantity;
-  beverageLogs = JSON.stringify(beverageLogs);
-  writeFile(path, beverageLogs);
-  return "transaction successful";
+  beverageDetails = { beverage: transactionData.beverage, qty: transactionData.qty, time: date };
+  beverageLogs[transactionData.empId].orders.push(beverageDetails);
+  beverageLogs[transactionData.empId].total += +transactionData.qty;
+  writeToFile(path, beverageLogs, writeFile);
+  return beverageDetails;
 };
 
-const query = function(transactionData, path, readFile) {
-  transactionHistory = [["empId", "beverage", "qty", "time"]];
-  empId = transactionData.empId;
-  let beverageLogs = utils.getBeverageLogs(path, readFile);
-  beverageLogs = JSON.parse(beverageLogs);
-  if (!beverageLogs[empId]) {
+const query = function(transactionData, beverageLogs) {
+  const transactionHistory = [["empId", "beverage", "qty", "time"]];
+  if (!beverageLogs[transactionData.empId]) {
     return "No entries for this empId";
   }
-  for (let order of beverageLogs[empId].orders) {
+  for (let order of beverageLogs[transactionData.empId].orders) {
     let record = Object.values(order);
-    record.splice(0, 0, empId);
+    record.splice(0, 0, transactionData.empId);
     transactionHistory.push(record);
   }
+  transactionHistory.push("total " + beverageLogs[transactionData.empId].total);
   return transactionHistory.join("\n");
 };
 
+const writeToFile = function(path, beverageLogs, writeFile) {
+  beverageLogs = JSON.stringify(beverageLogs);
+  writeFile(path, beverageLogs);
+};
 exports.query = query;
 exports.save = save;

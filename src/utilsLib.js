@@ -22,6 +22,7 @@ const existsBeverageLogs = function(path, writeFile, exists) {
 
 const getBeverageLogs = function(path, readFile) {
   let beverageLogs = readFile(path, "utf8");
+  beverageLogs = JSON.parse(beverageLogs);
   return beverageLogs;
 };
 
