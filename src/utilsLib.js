@@ -26,8 +26,31 @@ const getBeverageLogs = function(path, readFile) {
   return beverageLogs;
 };
 
+const getTotal = function(total, element) {
+  return (total += +element[2]);
+};
+
+const getTransaction = function(transactionHistory, transaction) {
+  let reference = transactionHistory[1];
+  let value = transactionHistory[2];
+  if (transaction[reference].includes(value)) {
+    transaction = Object.values(transaction);
+    transactionHistory[0].push(transaction);
+  }
+  return transactionHistory;
+};
+
+const getTransactionHistory = function(transactionData, beverageLogs) {
+  let reference = transactionData.date ? "date" : "empId";
+  let value = transactionData[reference];
+  let transactionHistory = beverageLogs.reduce(getTransaction, [[], reference, value]);
+  transactionHistory = transactionHistory[0];
+  transactionHistory.push(transactionHistory.reduce(getTotal, 0));
+  return transactionHistory;
+};
 exports.validateOptions = validateOptions;
 exports.arrangeOptions = arrangeOptions;
 exports.validateCommand = validateCommand;
 exports.existsBeverageLogs = existsBeverageLogs;
 exports.getBeverageLogs = getBeverageLogs;
+exports.getTransactionHistory = getTransactionHistory;

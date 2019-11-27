@@ -1,1 +1,6 @@
-[{"empId":"25314","beverage":"orange","qty":"1","date":"2019-11-27T05:11:05.975Z"},{"empId":"25313","beverage":"orange","qty":"1","date":"2019-11-27T05:11:21.385Z"},{"empId":"25313","beverage":"watermelon","qty":"1","date":"2019-11-27T05:11:39.105Z"},{"empId":"25323","beverage":"orange","qty":"1","date":"2019-11-27T07:16:53.867Z"},{"empId":"25323","beverage":"pokemon","qty":"1","date":"2019-11-27T08:21:34.059Z"},{"empId":"25323","beverage":"pokemon","qty":"1","date":"2019-11-27T08:24:29.351Z"}]
+[
+  { "empId": "25314", "beverage": "orange", "qty": "1", "date": "2019-11-27T05:11:05.975Z" },
+  { "empId": "25313", "beverage": "orange", "qty": "1", "date": "2019-11-27T05:11:21.385Z" },
+  { "empId": "25313", "beverage": "watermelon", "qty": "1", "date": "2019-11-27T05:11:39.105Z" },
+  { "empId": "25323", "beverage": "orange", "qty": "1", "date": "2019-11-27T07:16:53.867Z" }
+]
