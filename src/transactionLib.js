@@ -13,14 +13,22 @@ const save = function(transactionData, beverageLogs, date, path, writeFile) {
 };
 
 const query = function(transactionData, beverageLogs) {
-  const transactionHistory = [["empId", "beverage", "qty", "time"]];
-  for (let transaction of beverageLogs) {
-    let record = Object.values(transaction);
-    if (record.includes(transactionData.empId)) {
-      transactionHistory.push(record);
-    }
+  const transactiontitles = [["empId", "beverage", "qty", "time"]];
+  let reference = transactionData.date || transactionData.empId;
+  let transactionHistory = beverageLogs.reduce(getTransaction, [[], reference]);
+  transactionHistory = transactionHistory[0];
+  if (transactionHistory.length > 0) {
+    return transactionHistory;
   }
-  return transactionHistory.join("\n");
+  return "no entries";
+};
+
+const getTransaction = function(transactionHistory, transaction) {
+  transaction = Object.values(transaction);
+  if (transaction.includes(transactionHistory[1])) {
+    transactionHistory[0].push(transaction);
+  }
+  return transactionHistory;
 };
 
 const writeToFile = function(path, beverageLogs, writeFile) {

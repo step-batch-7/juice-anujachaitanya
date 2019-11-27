@@ -1,7 +1,7 @@
 const utils = require("./utilsLib");
 
 const transformDataIntoObj = function(transformedData) {
-  let transaction = { beverage: undefined, qty: undefined, empId: undefined };
+  let transaction = { beverage: undefined, qty: undefined, empId: undefined, date: undefined };
   transaction = transformedData[0].reduce(utils.arrangeOptions, transaction);
   transaction.command = transformedData[1].slice(2);
   return transaction;
@@ -20,10 +20,7 @@ const isValidTransaction = function(input) {
   transformedData = transformDataToArray(input);
   let isValidInstruction = transformedData[0].every(utils.validateOptions);
   let isValidCommand = utils.validateCommand(transformedData[1]);
-  if (isValidInstruction && isValidCommand) {
-    return true;
-  }
-  return false;
+  return isValidInstruction && isValidCommand;
 };
 
 const isValidBeverage = function(beverage) {

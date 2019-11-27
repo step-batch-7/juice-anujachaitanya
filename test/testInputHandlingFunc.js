@@ -25,7 +25,7 @@ describe("transformDataIntoObj", () => {
       ],
       "--save"
     ]);
-    let expected = { beverage: "orange", qty: 1, command: "save", empId: 25313 };
+    let expected = { beverage: "orange", qty: 1, command: "save", empId: 25313, date: undefined };
     assert.deepStrictEqual(actual, expected);
   });
 
@@ -37,7 +37,13 @@ describe("transformDataIntoObj", () => {
       ],
       "--save"
     ]);
-    let expected = { beverage: "orange", qty: 1, command: "save", empId: undefined };
+    let expected = {
+      beverage: "orange",
+      qty: 1,
+      command: "save",
+      empId: undefined,
+      date: undefined
+    };
     assert.deepStrictEqual(actual, expected);
   });
 });
@@ -92,7 +98,13 @@ describe("areEnoughOptions", () => {
 describe("createObjectForTransaction", () => {
   it("should return object for given details", () => {
     let actual = inputHandler.createObjectForTransaction(["--query", "--empId", 25313]);
-    let expected = { command: "query", empId: 25313, beverage: undefined, qty: undefined };
+    let expected = {
+      command: "query",
+      empId: 25313,
+      beverage: undefined,
+      qty: undefined,
+      date: undefined
+    };
     assert.deepStrictEqual(actual, expected);
   });
 });

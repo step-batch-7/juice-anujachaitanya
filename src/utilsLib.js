@@ -4,7 +4,7 @@ const arrangeOptions = function(transaction, data) {
 };
 
 const validateOptions = function(data) {
-  options = ["--qty", "--beverage", "--empId"];
+  options = ["--qty", "--beverage", "--empId", "--date"];
   return options.includes(data[0]) && data.length == 2;
 };
 
