@@ -35,6 +35,14 @@ const isValidQty = function(qty) {
   return Number.isInteger(+qty);
 };
 
+const isValidDate = function(date) {
+  if (date) {
+    date = date.split("-");
+    date = new Date(date[0], date[1], date[2]);
+    return date.getYear() && date.getMonth() && date.getDate();
+  }
+};
+
 const checkOptForSave = function(transactionDetails) {
   return (
     isValidBeverage(transactionDetails.beverage) &&
@@ -44,7 +52,7 @@ const checkOptForSave = function(transactionDetails) {
 };
 
 const checkOptForQuery = function(transactionDetails) {
-  return isValidEmpId(transactionDetails.empId);
+  return isValidEmpId(transactionDetails.empId) || isValidDate(transactionDetails.date);
 };
 
 const areEnoughOptions = function(transaction) {

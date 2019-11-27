@@ -21,8 +21,8 @@ describe("save", () => {
 
 describe("query", () => {
   it("should return beverageLogs for given empId", () => {
-    let actual = query({ empId: 25313 }, [[25313], [25313]]);
-    let expected = [[25313], [25313]];
+    let actual = query({ empId: 25313 }, [{ empId: "25313" }, { empId: "25313" }]);
+    let expected = [["25313"], ["25313"]];
     assert.deepStrictEqual(actual, expected);
   });
 

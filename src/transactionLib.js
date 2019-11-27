@@ -5,17 +5,17 @@ const save = function(transactionData, beverageLogs, date, path, writeFile) {
     empId: transactionData.empId,
     beverage: transactionData.beverage,
     qty: transactionData.qty,
-    time: date
+    date: date
   };
   beverageLogs.push(beverageDetails);
   writeToFile(path, beverageLogs, writeFile);
-  return beverageDetails;
+  return Object.values(beverageDetails);
 };
 
 const query = function(transactionData, beverageLogs) {
-  const transactiontitles = [["empId", "beverage", "qty", "time"]];
-  let reference = transactionData.date || transactionData.empId;
-  let transactionHistory = beverageLogs.reduce(getTransaction, [[], reference]);
+  let reference = transactionData.date ? "date" : "empId";
+  let value = transactionData[reference];
+  let transactionHistory = beverageLogs.reduce(getTransaction, [[], reference, value]);
   transactionHistory = transactionHistory[0];
   if (transactionHistory.length > 0) {
     return transactionHistory;
@@ -24,8 +24,10 @@ const query = function(transactionData, beverageLogs) {
 };
 
 const getTransaction = function(transactionHistory, transaction) {
-  transaction = Object.values(transaction);
-  if (transaction.includes(transactionHistory[1])) {
+  let reference = transactionHistory[1];
+  let value = transactionHistory[2];
+  if (transaction[reference].includes(value)) {
+    transaction = Object.values(transaction);
     transactionHistory[0].push(transaction);
   }
   return transactionHistory;
