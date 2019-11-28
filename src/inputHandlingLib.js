@@ -41,6 +41,7 @@ const isValidDate = function(date) {
     date = new Date(date[0], date[1], date[2]);
     return date.getYear() && date.getMonth() && date.getDate();
   }
+  return true;
 };
 
 const checkOptForSave = function(transactionDetails) {
@@ -52,7 +53,11 @@ const checkOptForSave = function(transactionDetails) {
 };
 
 const checkOptForQuery = function(transactionDetails) {
-  return isValidEmpId(transactionDetails.empId) || isValidDate(transactionDetails.date);
+  return (
+    isValidEmpId(transactionDetails.empId) &&
+    isValidDate(transactionDetails.date) &&
+    isValidBeverage(transactionDetails.beverage)
+  );
 };
 
 const areEnoughOptions = function(transaction) {
@@ -62,11 +67,22 @@ const areEnoughOptions = function(transaction) {
   let validateEnoughArgv = validityFunc[transactionDetails.command];
   return validateEnoughArgv(transactionDetails);
 };
-
-const createObjectForTransaction = function(input) {
+const createObjectForValidation = function(input) {
   let transactionDetails = transformDataToArray(input);
   transactionDetails = transformDataIntoObj(transactionDetails);
   return transactionDetails;
+};
+
+const createObjectForTransaction = function(transactionDetails) {
+  let transaction = JSON.stringify(transactionDetails);
+  transaction = JSON.parse(transaction);
+  delete transaction.command;
+  for (let key in transaction) {
+    if (!transaction[key]) {
+      delete transaction[key];
+    }
+  }
+  return transaction;
 };
 
 exports.isValidTransaction = isValidTransaction;
@@ -76,3 +92,4 @@ exports.areEnoughOptions = areEnoughOptions;
 exports.createObjectForTransaction = createObjectForTransaction;
 exports.checkOptForSave = checkOptForSave;
 exports.checkOptForQuery = checkOptForQuery;
+exports.createObjectForValidation = createObjectForValidation;

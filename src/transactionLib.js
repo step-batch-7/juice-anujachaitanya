@@ -9,15 +9,16 @@ const save = function(transactionData, beverageLogs, date, path, writeFile) {
   };
   beverageLogs.push(beverageDetails);
   writeToFile(path, beverageLogs, writeFile);
-  return Object.values(beverageDetails);
+  return beverageDetails;
 };
 
 const query = function(transactionData, beverageLogs) {
-  let transactionHistory = utils.getTransactionHistory(transactionData, beverageLogs);
-  if (transactionHistory.length > 1) {
-    return transactionHistory;
+  let transactionHistory = beverageLogs;
+  for (let key in transactionData) {
+    filterFunction = utils.getTransactionHistory(transactionData[key], key);
+    transactionHistory = transactionHistory.filter(filterFunction);
   }
-  return "no entries";
+  return transactionHistory.length > 1 ? transactionHistory : [{ record: "no entries" }];
 };
 
 const writeToFile = function(path, beverageLogs, writeFile) {

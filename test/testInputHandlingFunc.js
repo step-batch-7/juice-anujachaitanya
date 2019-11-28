@@ -1,4 +1,5 @@
-const assert = require("assert");
+const chai = require("chai");
+const assert = chai.assert;
 const inputHandler = require("../src/inputHandlingLib");
 
 describe("transformDataToArray ", () => {
@@ -77,7 +78,7 @@ describe("checkOptForSave", () => {
 
   it("should invalidate invalid values for beverage", () => {
     let input = { beverage: 2313, empId: "anuja", qty: "1a2" };
-    assert.ok(!inputHandler.checkOptForSave(input));
+    assert.notOk(inputHandler.checkOptForSave(input));
   });
 });
 
@@ -91,7 +92,7 @@ describe("checkOptForQuery", () => {
 describe("areEnoughOptions", () => {
   it("should invalidate incorrect no of arguments", () => {
     let input = ["--query", "--empId", "anuja"];
-    assert.ok(!inputHandler.areEnoughOptions(input));
+    assert.notOk(inputHandler.areEnoughOptions(input));
   });
 });
 

@@ -9,7 +9,7 @@ const validateOptions = function(data) {
 };
 
 const validateCommand = function(command) {
-  validCommand = ["--save", "--query"];
+  validCommand = ["--save", "--query", "--beverage"];
   return validCommand.includes(command);
 };
 
@@ -26,28 +26,12 @@ const getBeverageLogs = function(path, readFile) {
   return beverageLogs;
 };
 
-const getTotal = function(total, element) {
-  return (total += +element[2]);
+const getTransactionHistory = function(value, key) {
+  return function(transaction) {
+    return transaction[key].includes(value);
+  };
 };
 
-const getTransaction = function(transactionHistory, transaction) {
-  let reference = transactionHistory[1];
-  let value = transactionHistory[2];
-  if (transaction[reference].includes(value)) {
-    transaction = Object.values(transaction);
-    transactionHistory[0].push(transaction);
-  }
-  return transactionHistory;
-};
-
-const getTransactionHistory = function(transactionData, beverageLogs) {
-  let reference = transactionData.date ? "date" : "empId";
-  let value = transactionData[reference];
-  let transactionHistory = beverageLogs.reduce(getTransaction, [[], reference, value]);
-  transactionHistory = transactionHistory[0];
-  transactionHistory.push(transactionHistory.reduce(getTotal, 0));
-  return transactionHistory;
-};
 exports.validateOptions = validateOptions;
 exports.arrangeOptions = arrangeOptions;
 exports.validateCommand = validateCommand;
