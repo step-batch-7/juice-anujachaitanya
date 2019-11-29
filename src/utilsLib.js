@@ -1,3 +1,5 @@
+const fsFuncs = require("./constants").fsFuncs;
+
 const arrangeOptions = function(transaction, data) {
   transaction[data[0].slice(2)] = data[1];
   return transaction;
@@ -15,13 +17,13 @@ const validateCommand = function(command) {
 
 const existsBeverageLogs = function(path, writeFile, exists) {
   if (!exists(path)) {
-    writeFile(path, "[]", "utf8");
+    writeFile(path, "[]", fsFuncs.encoding);
     return true;
   }
 };
 
 const getBeverageLogs = function(path, readFile) {
-  let beverageLogs = readFile(path, "utf8");
+  let beverageLogs = readFile(path, fsFuncs.encoding);
   beverageLogs = JSON.parse(beverageLogs);
   return beverageLogs;
 };

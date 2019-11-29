@@ -1,15 +1,10 @@
 const utils = require("./utilsLib");
 
 const save = function(transactionData, beverageLogs, date, path, writeFile) {
-  beverageDetails = {
-    empId: transactionData.empId,
-    beverage: transactionData.beverage,
-    qty: transactionData.qty,
-    date: date
-  };
-  beverageLogs.push(beverageDetails);
+  transactionData.date = date;
+  beverageLogs.push(transactionData);
   writeToFile(path, beverageLogs, writeFile);
-  return beverageDetails;
+  return transactionData;
 };
 
 const query = function(transactionData, beverageLogs) {
@@ -22,7 +17,7 @@ const query = function(transactionData, beverageLogs) {
 };
 
 const writeToFile = function(path, beverageLogs, writeFile) {
-  beverageLogs = JSON.stringify(beverageLogs, null, 2);
+  beverageLogs = JSON.stringify(beverageLogs);
   writeFile(path, beverageLogs);
 };
 

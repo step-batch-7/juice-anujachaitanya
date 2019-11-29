@@ -97,11 +97,51 @@ describe("areEnoughOptions", () => {
 });
 
 describe("createObjectForTransaction", () => {
-  it("should return object for given details", () => {
+  it("should remove command key", () => {
     let actual = inputHandler.createObjectForTransaction({ command: "query", empId: "25313" });
     let expected = {
       empId: "25313"
     };
     assert.deepStrictEqual(actual, expected);
+  });
+
+  it("should remove unnecessary keys from the object", () => {
+    let actual = inputHandler.createObjectForTransaction({ empId: "25313", beverage: undefined });
+    let expected = {
+      empId: "25313"
+    };
+    assert.deepStrictEqual(actual, expected);
+  });
+});
+
+describe("createObjectForValidation", () => {
+  it("should return object for given transaction", () => {
+    let actual = inputHandler.createObjectForValidation([
+      "--save",
+      "--empId",
+      25313,
+      "--beverage",
+      "orange",
+      "--qty",
+      8
+    ]);
+    let expected = {
+      command: "save",
+      date: undefined,
+      empId: 25313,
+      beverage: "orange",
+      qty: 8
+    };
+    assert.deepStrictEqual(actual, expected);
+  });
+});
+
+describe("isValidDate", () => {
+  it("should validate if date is undefined", () => {
+    assert.ok(inputHandler.isValidDate(undefined));
+  });
+
+  it("should validate correct date", () => {
+    assert.ok(inputHandler.isValidDate("2019-10-19"));
   });
 });

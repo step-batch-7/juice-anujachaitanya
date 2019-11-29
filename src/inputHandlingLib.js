@@ -93,3 +93,4 @@ exports.createObjectForTransaction = createObjectForTransaction;
 exports.checkOptForSave = checkOptForSave;
 exports.checkOptForQuery = checkOptForQuery;
 exports.createObjectForValidation = createObjectForValidation;
+exports.isValidDate = isValidDate;

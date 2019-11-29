@@ -1,7 +1,7 @@
 const constants = require("./constants");
 
 const formatOutputForSave = function(transaction) {
-  let record = Object.values(transaction);
+  let record = toRow(transaction);
   return `Transaction Recorded:\n${constants.titles}\n${record}`;
 };
 
@@ -17,7 +17,7 @@ const formatOutputForQuery = function(records) {
   const rows = records.map(toRow);
   const totalBeverages = rows.reduce(getTotal, 0);
   const transactionHistory = [constants.titles, rows.join("\n")].join("\n");
-  return `${transactionHistory}\nTotal: ${totalBeverages} Juice(s)`;
+  return `${transactionHistory}\nTotal: ${totalBeverages} Juices`;
 };
 
 exports.formatOutputForQuery = formatOutputForQuery;
