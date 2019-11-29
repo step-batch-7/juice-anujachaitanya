@@ -23,13 +23,19 @@ describe("save", () => {
 describe("query", () => {
   it("should return beverageLogs for given empId", () => {
     let actual = query({ empId: 25313 }, [{ empId: "25313" }, { empId: "25313" }]);
-    let expected = [["25313"], ["25313"], NaN];
+    let expected = [{ empId: "25313" }, { empId: "25313" }];
     assert.deepStrictEqual(actual, expected);
   });
 
   it("should return no entries for unknown empId", () => {
     let actual = query({ empId: 25313 }, []);
-    let expected = "no entries";
-    assert.strictEqual(actual, expected);
+    let expected = [];
+    assert.deepStrictEqual(actual, expected);
+  });
+
+  it("should return beverage logs for given date", () => {
+    let actual = query({ date: "2019-10-12" }, [{ date: "2019-10-12" }]);
+    let expected = [{ date: "2019-10-12" }];
+    assert.deepStrictEqual(actual, expected);
   });
 });

@@ -98,13 +98,9 @@ describe("areEnoughOptions", () => {
 
 describe("createObjectForTransaction", () => {
   it("should return object for given details", () => {
-    let actual = inputHandler.createObjectForTransaction(["--query", "--empId", 25313]);
+    let actual = inputHandler.createObjectForTransaction({ command: "query", empId: "25313" });
     let expected = {
-      command: "query",
-      empId: 25313,
-      beverage: undefined,
-      qty: undefined,
-      date: undefined
+      empId: "25313"
     };
     assert.deepStrictEqual(actual, expected);
   });

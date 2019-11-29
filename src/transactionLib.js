@@ -18,11 +18,11 @@ const query = function(transactionData, beverageLogs) {
     filterFunction = utils.getTransactionHistory(transactionData[key], key);
     transactionHistory = transactionHistory.filter(filterFunction);
   }
-  return transactionHistory.length > 1 ? transactionHistory : [{ record: "no entries" }];
+  return transactionHistory;
 };
 
 const writeToFile = function(path, beverageLogs, writeFile) {
-  beverageLogs = JSON.stringify(beverageLogs);
+  beverageLogs = JSON.stringify(beverageLogs, null, 2);
   writeFile(path, beverageLogs);
 };
 

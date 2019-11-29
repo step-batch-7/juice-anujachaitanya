@@ -24,7 +24,7 @@ const isValidTransaction = function(input) {
 };
 
 const isValidBeverage = function(beverage) {
-  return typeof beverage == "string";
+  return typeof beverage == "string" || !beverage;
 };
 
 const isValidEmpId = function(empId) {
