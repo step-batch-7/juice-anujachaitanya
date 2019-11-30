@@ -1,6 +1,7 @@
 const constants = require("./constants");
 
 const formatOutputForSave = function(transaction) {
+  transaction.date = transaction.date.toJSON();
   let record = toRow(transaction);
   return `Transaction Recorded:\n${constants.titles}\n${record}`;
 };
@@ -13,6 +14,7 @@ const toRow = function(transaction) {
 const getTotal = function(total, record) {
   return total + +record[2];
 };
+
 const formatOutputForQuery = function(records) {
   const rows = records.map(toRow);
   const totalBeverages = rows.reduce(getTotal, 0);

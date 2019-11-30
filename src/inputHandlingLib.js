@@ -1,8 +1,10 @@
 const utils = require("./utilsLib");
 
 const transformDataIntoObj = function(transformedData) {
-  let transaction = { beverage: undefined, qty: undefined, empId: undefined, date: undefined };
-  transaction = transformedData[0].reduce(utils.arrangeOptions, transaction);
+  let transaction = {};
+  for (let pair of transformedData[0]) {
+    transaction[pair[0].slice(2)] = pair[1];
+  }
   transaction.command = transformedData[1].slice(2);
   return transaction;
 };
@@ -24,11 +26,11 @@ const isValidTransaction = function(input) {
 };
 
 const isValidBeverage = function(beverage) {
-  return typeof beverage == "string" || !beverage;
+  return beverage != "";
 };
 
 const isValidEmpId = function(empId) {
-  return Number.isInteger(+empId);
+  return Number.isInteger(+empId) || !empId;
 };
 
 const isValidQty = function(qty) {
@@ -77,11 +79,6 @@ const createObjectForTransaction = function(transactionDetails) {
   let transaction = JSON.stringify(transactionDetails);
   transaction = JSON.parse(transaction);
   delete transaction.command;
-  for (let key in transaction) {
-    if (!transaction[key]) {
-      delete transaction[key];
-    }
-  }
   return transaction;
 };
 

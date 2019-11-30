@@ -16,39 +16,6 @@ describe("transformDataToArray ", () => {
   });
 });
 
-describe("transformDataIntoObj", () => {
-  it("should transform the given data into object", () => {
-    let actual = inputHandler.transformDataIntoObj([
-      [
-        ["--beverage", "orange"],
-        ["--qty", 1],
-        ["--empId", 25313]
-      ],
-      "--save"
-    ]);
-    let expected = { beverage: "orange", qty: 1, command: "save", empId: 25313, date: undefined };
-    assert.deepStrictEqual(actual, expected);
-  });
-
-  it("should transform given data to object if one element is undefined", () => {
-    let actual = inputHandler.transformDataIntoObj([
-      [
-        ["--beverage", "orange"],
-        ["--qty", 1]
-      ],
-      "--save"
-    ]);
-    let expected = {
-      beverage: "orange",
-      qty: 1,
-      command: "save",
-      empId: undefined,
-      date: undefined
-    };
-    assert.deepStrictEqual(actual, expected);
-  });
-});
-
 describe("isValidTransaction", () => {
   it("should validate transaction", () => {
     let actual = inputHandler.isValidTransaction([
@@ -96,24 +63,6 @@ describe("areEnoughOptions", () => {
   });
 });
 
-describe("createObjectForTransaction", () => {
-  it("should remove command key", () => {
-    let actual = inputHandler.createObjectForTransaction({ command: "query", empId: "25313" });
-    let expected = {
-      empId: "25313"
-    };
-    assert.deepStrictEqual(actual, expected);
-  });
-
-  it("should remove unnecessary keys from the object", () => {
-    let actual = inputHandler.createObjectForTransaction({ empId: "25313", beverage: undefined });
-    let expected = {
-      empId: "25313"
-    };
-    assert.deepStrictEqual(actual, expected);
-  });
-});
-
 describe("createObjectForValidation", () => {
   it("should return object for given transaction", () => {
     let actual = inputHandler.createObjectForValidation([
@@ -127,7 +76,6 @@ describe("createObjectForValidation", () => {
     ]);
     let expected = {
       command: "save",
-      date: undefined,
       empId: 25313,
       beverage: "orange",
       qty: 8

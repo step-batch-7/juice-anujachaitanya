@@ -1,6 +1,7 @@
 const utils = require("./utilsLib");
 
 const save = function(transactionData, beverageLogs, date, path, writeFile) {
+  console.log(date);
   transactionData.date = date;
   beverageLogs.push(transactionData);
   writeToFile(path, beverageLogs, writeFile);
@@ -8,9 +9,14 @@ const save = function(transactionData, beverageLogs, date, path, writeFile) {
 };
 
 const query = function(transactionData, beverageLogs) {
+  const filterFuncs = {
+    empId: utils.getTransactionHistory,
+    date: utils.getTransactionHistoryForDate,
+    beverage: utils.getTransactionHistory
+  };
   let transactionHistory = beverageLogs;
   for (let key in transactionData) {
-    filterFunction = utils.getTransactionHistory(transactionData[key], key);
+    filterFunction = filterFuncs[key](transactionData[key], key);
     transactionHistory = transactionHistory.filter(filterFunction);
   }
   return transactionHistory;
