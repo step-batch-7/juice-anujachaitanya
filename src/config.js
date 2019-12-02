@@ -4,7 +4,8 @@ const generateStorePath = function(env) {
 
 const generateDate = function(env) {
   stubbedDate = new Date(env.NOW);
-  date = stubbedDate.getTime() != NaN ? stubbedDate : new Date();
+  isValidNOW = Number.isNaN(stubbedDate.getTime());
+  date = isValidNOW ? new Date() : stubbedDate;
   return date;
 };
 

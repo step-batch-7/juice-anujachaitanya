@@ -62,28 +62,6 @@ describe("areEnoughOptions", () => {
     assert.notOk(inputHandler.areEnoughOptions(input));
   });
 });
-
-describe("createObjectForValidation", () => {
-  it("should return object for given transaction", () => {
-    let actual = inputHandler.createObjectForValidation([
-      "--save",
-      "--empId",
-      25313,
-      "--beverage",
-      "orange",
-      "--qty",
-      8
-    ]);
-    let expected = {
-      command: "save",
-      empId: 25313,
-      beverage: "orange",
-      qty: 8
-    };
-    assert.deepStrictEqual(actual, expected);
-  });
-});
-
 describe("isValidDate", () => {
   it("should validate if date is undefined", () => {
     assert.ok(inputHandler.isValidDate(undefined));
