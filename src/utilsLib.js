@@ -2,7 +2,6 @@ const fsFuncs = require("./constants").fsFuncs;
 
 const arrangeOptions = function(transaction, data) {
   transaction[data[0].slice(2)] = data[1];
-  console.log(transaction);
   return transaction;
 };
 
@@ -31,7 +30,8 @@ const getBeverageLogs = function(path, readFile) {
 
 const getTransactionHistoryForDate = function(value, key) {
   return function(transaction) {
-    return transaction[key].includes(value);
+    let date = transaction[key].slice(0, 10);
+    return date == value;
   };
 };
 

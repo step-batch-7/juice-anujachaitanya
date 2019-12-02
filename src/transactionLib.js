@@ -1,7 +1,6 @@
 const utils = require("./utilsLib");
 
 const save = function(transactionData, beverageLogs, date, path, writeFile) {
-  console.log(date);
   transactionData.date = date;
   beverageLogs.push(transactionData);
   writeToFile(path, beverageLogs, writeFile);
