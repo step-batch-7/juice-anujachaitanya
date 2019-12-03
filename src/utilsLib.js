@@ -15,15 +15,15 @@ const validateCommand = function(command) {
   return validCommand.includes(command);
 };
 
-const existsBeverageLogs = function(path, writeFile, exists) {
+const existsBeverageLogs = function(path, writeFile, exists, encoding) {
   if (!exists(path)) {
-    writeFile(path, "[]", fsFuncs.encoding);
+    writeFile(path, "[]", encoding);
     return true;
   }
 };
 
-const getBeverageLogs = function(path, readFile) {
-  let beverageLogs = readFile(path, fsFuncs.encoding);
+const getBeverageLogs = function(path, readFile, encoding) {
+  let beverageLogs = readFile(path, encoding);
   beverageLogs = JSON.parse(beverageLogs);
   return beverageLogs;
 };

@@ -11,13 +11,14 @@ describe("getDataStorePath", function() {
     assert.strictEqual(generateStorePath(env), "./beverageLogs.json");
   });
 });
+
 describe("timeStamp", function() {
   it("should give current time by default", function() {
     assert.deepStrictEqual(generateDate({}), new Date());
   });
   it("should give stubbed time from env variable", function() {
     const stubbedDate = new Date("2019-01-01");
-    const env = { NOW: stubbedDate.toJSON() };
+    const env = { NOW: stubbedDate };
     assert.deepStrictEqual(generateDate(env), stubbedDate);
   });
 });

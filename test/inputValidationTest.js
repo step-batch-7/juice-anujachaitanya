@@ -1,20 +1,6 @@
 const chai = require("chai");
 const assert = chai.assert;
-const inputHandler = require("../src/inputHandlingLib");
-
-describe("transformDataToArray ", () => {
-  it("should convert given data into array of array", () => {
-    let actual = inputHandler.transformDataToArray(["--save", "--beverage", "orange", "--qty", 1]);
-    let expected = [
-      [
-        ["--beverage", "orange"],
-        ["--qty", 1]
-      ],
-      "--save"
-    ];
-    assert.deepStrictEqual(actual, expected);
-  });
-});
+const inputHandler = require("../src/inputValidation");
 
 describe("isValidTransaction", () => {
   it("should validate transaction", () => {
@@ -39,12 +25,12 @@ describe("isValidTransaction", () => {
 
 describe("checkOptForSave", () => {
   it("should validate all options for save", () => {
-    let input = { beverage: "orange", empId: 2323, qty: 12 };
+    let input = { command: "save", beverage: "orange", empId: 2323, qty: 12 };
     assert.ok(inputHandler.checkOptForSave(input));
   });
 
   it("should invalidate invalid values for beverage", () => {
-    let input = { beverage: 2313, empId: "anuja", qty: "1a2" };
+    let input = { command: "save", beverage: 2313, empId: "anuja", qty: "1a2" };
     assert.notOk(inputHandler.checkOptForSave(input));
   });
 });

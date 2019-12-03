@@ -44,7 +44,7 @@ describe("existsBeverageLogs", () => {
       return false;
     };
 
-    assert.ok(utils.existsBeverageLogs("./beverageLogs.json", writeFile, exists));
+    assert.ok(utils.existsBeverageLogs("./beverageLogs.json", writeFile, exists, "utf8"));
   });
 
   it("should not execute if statement if file is present", () => {
@@ -71,6 +71,6 @@ describe("getBeverageLogs", () => {
       assert.deepStrictEqual(actual, expected);
       return true;
     };
-    assert.ok(utils.getBeverageLogs("./beverage.json", readFile));
+    assert.ok(utils.getBeverageLogs("./beverage.json", readFile, "utf8"));
   });
 });

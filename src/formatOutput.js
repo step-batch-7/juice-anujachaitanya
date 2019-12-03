@@ -18,8 +18,10 @@ const getTotal = function(total, record) {
 const formatOutputForQuery = function(records) {
   const rows = records.map(toRow);
   const totalBeverages = rows.reduce(getTotal, 0);
-  const transactionHistory = [constants.titles, rows.join("\n")].join("\n");
-  return `${transactionHistory}\nTotal: ${totalBeverages} Juices`;
+  const format = totalBeverages == 1 ? "Juice" : "Juices";
+  let arrangedRows = rows.join("\n");
+  const transactionHistory = [constants.titles, arrangedRows].join("\n");
+  return `${transactionHistory}\nTotal: ${totalBeverages} ${format}`;
 };
 
 exports.formatOutputForQuery = formatOutputForQuery;
