@@ -1,18 +1,18 @@
 const fsFuncs = require("./constants").fsFuncs;
 
-const arrangeOptions = function(transaction, data) {
-  transaction[data[0].slice(2)] = data[1];
+const arrangeOptions = function(transaction, pair) {
+  transaction[pair[0].slice(2)] = pair[1];
   return transaction;
 };
 
-const validateOptions = function(data) {
-  options = ["--qty", "--beverage", "--empId", "--date"];
-  return options.includes(data[0]) && data.length == 2;
+const validateOptions = function(option) {
+  const options = ["--qty", "--beverage", "--empId", "--date"];
+  return options.includes(option[0]) && option.length == 2;
 };
 
 const validateCommand = function(command) {
-  validCommand = ["--save", "--query", "--beverage"];
-  return validCommand.includes(command);
+  const validCommands = ["--save", "--query", "--beverage"];
+  return validCommands.includes(command);
 };
 
 const existsBeverageLogs = function(path, writeFile, exists, encoding) {
